@@ -1,0 +1,28 @@
+Script started on 2022-11-09 01:18:39-05:00
+shivam@sjsu:/mnt/scratch/shivam/ws9[shivam@sjsu ws9]$ history -c
+shivam@sjsu:/mnt/scratch/shivam/ws9[shivam@sjsu ws9]$ vi randomsample.sh
+
+#!/bin/bash
+if [ -z "$1" ]
+then
+        echo "\$1 is empty"
+else
+        if [ -z "$2" ]
+        then
+                echo "\$2 is empty"
+        else
+                total_lines=$(wc -l $2 | awk -F " " '{print $1}')
+                random=$(($1 % 100))
+                decimal=$(bc <<< "scale=2;$random/100")
+                lines_to_be_printed_dec=$(bc <<< "scale=1;$decimal*$total_lines")
+                lines=${lines_to_be_printed_dec%.*}
+                shuf -n $lines $2
+        fi
+fi
+
+shivam@sjsu:/mnt/scratch/shivam/ws9[shivam@sjsu ws9]$ chmod 777 randomsample.sh
+shivam@sjsu:/mnt/scratch/shivam/ws9[shivam@sjsu ws9]$ ./randomsample.sh $RANDOM amazon_reviews_us_Books_v1_02.tsv > output.txt
+shivam@sjsu:/mnt/scratch/shivam/ws9[shivam@sjsu ws9]$ wc -l output
+920389 output.txt
+shivam@sjsu:/mnt/scratch/shivam/ws9[shivam@sjsu ws9]$ history > cmds.log
+

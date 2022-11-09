@@ -1,0 +1,5 @@
+    1  vi randomsample.sh
+    2  chmod 777 randomsample.sh
+    3  ./randomsample.sh $RANDOM amazon_reviews_us_Books_v1_02.tsv > output.txt
+    4  wc -l output.txt 
+    5  history > cmds.log
